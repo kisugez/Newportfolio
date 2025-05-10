@@ -89,6 +89,17 @@ export default function Portfolio() {
     setLightboxOpen(true)
   }
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [subject, setSubject] = useState("");
+const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  }
+
   return (
     <div className="bg-[#f8f5f2] text-[#2d2d2d] min-h-screen" ref={containerRef}>
       {/* Navigation */}
@@ -236,7 +247,12 @@ export default function Portfolio() {
           style={{ opacity, scale }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
-          <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-[#e6ddd6] opacity-50"></div>
+          <div
+            className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-[#e6ddd6] opacity-50"
+            style={{
+              transform: "scale(0.9)", // Adjust scale for mobile view
+            }}
+          ></div>
         </motion.div>
 
         <div className="max-w-4xl mx-auto text-center z-10">
@@ -300,39 +316,6 @@ export default function Portfolio() {
             Fullstack developer specializing in building modern, responsive, and performant web applications.
           </motion.p>
 
-          {/* Interactive Developer Stats */}
-          <motion.div style={{ y: springY }} className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-            {[
-              { value: "7+", label: "Years Experience" },
-              { value: "50+", label: "Projects Completed" },
-              { value: "30+", label: "Happy Clients" },
-              { value: "15+", label: "Technologies" },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white p-4 rounded-lg shadow-sm cursor-pointer gradient-border"
-                onClick={() =>
-                  openLightbox({
-                    title: stat.label,
-                    description: `Details about my ${stat.label.toLowerCase()}.`,
-                    image: "/placeholder.svg",
-                    stats: {
-                      Total: stat.value,
-                      "Last Year": index === 0 ? "1+" : index === 1 ? "12+" : index === 2 ? "8+" : "5+",
-                    },
-                  })
-                }
-              >
-                <div className="text-3xl font-bold text-[#a67c52] glow-text">{stat.value}</div>
-                <div className="text-sm text-[#6d6d6d] font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -354,29 +337,6 @@ export default function Portfolio() {
             </Button>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center">
-            <p className="text-sm text-[#6d6d6d] mb-2 font-medium">Scroll to explore</p>
-            <div className="w-[30px] h-[50px] border-2 border-[#a67c52] rounded-full flex justify-center glow-box">
-              <motion.div
-                animate={{
-                  y: [0, 15, 0],
-                }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 1.5,
-                }}
-                className="w-[8px] h-[8px] bg-[#a67c52] rounded-full mt-2"
-              />
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       {/* Projects Section */}
@@ -431,7 +391,7 @@ export default function Portfolio() {
             >
               <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden gradient-border glow-box">
                 <Image
-                  src="/placeholder.svg?height=500&width=400"
+                  src="_BLS8983.jpg?heightplaceholder=500&width=400"
                   alt="Developer portrait"
                   fill
                   className="object-cover"
@@ -448,18 +408,17 @@ export default function Portfolio() {
             >
               <h2 className="text-3xl md:text-4xl font-bold glow-text">About Me</h2>
               <p className="text-[#6d6d6d]">
-                I'm a passionate fullstack developer with over 5 years of experience building web applications. My
+                I'm a passionate fullstack developer with 2 years of experience building web applications. My
                 journey in tech started with a curiosity about how websites work, which led me to dive deep into both
                 frontend and backend technologies.
               </p>
               <p className="text-[#6d6d6d]">
-                I specialize in creating seamless user experiences with modern JavaScript frameworks while building
-                robust and scalable backend systems. My approach combines technical expertise with a keen eye for design
+                I specialize in creating seamless user experiences with modern JavaScript frameworks such as React JS and Backend Frameworks like Django and Node while building
+                robust and scalable systems. My approach combines technical expertise with a keen eye for design
                 and user experience.
               </p>
               <p className="text-[#6d6d6d]">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-                or sharing my knowledge through technical writing and mentoring.
+                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects.
               </p>
 
               <Button
@@ -524,7 +483,7 @@ export default function Portfolio() {
             >
               <SkillCategory
                 title="Database & DevOps"
-                skills={["MongoDB", "PostgreSQL", "Firebase", "Docker", "AWS", "CI/CD"]}
+                skills={["MongoDB", "PostgreSQL","Docker","CI/CD"]}
                 delay={0.4}
               />
             </motion.div>
@@ -556,60 +515,85 @@ export default function Portfolio() {
             viewport={{ once: true, margin: "-100px" }}
             className="bg-white rounded-lg p-8 shadow-sm gradient-border glow-box"
           >
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                    placeholder="Your email"
-                  />
-                </div>
+            {formSubmitted ? (
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-[#a67c52] mb-4">Thank You!</h2>
+                <p className="text-[#6d6d6d]">Your message has been sent successfully.</p>
               </div>
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">
-                  Subject
-                </label>
-                <input
-                  id="subject"
-                  type="text"
-                  className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                  placeholder="Subject"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                  placeholder="Your message"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full py-6 glow-box"
+            ) : (
+              <form
+                className="space-y-6"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setFormSubmitted(true); // Set the formSubmitted state to true
+                }}
               >
-                Send Message
-              </Button>
-            </form>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium">
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                      placeholder="Your email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="subject" className="text-sm font-medium">
+                    Subject
+                  </label>
+                  <input
+                    id="subject"
+                    type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                    placeholder="Subject"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={5}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                    placeholder="Your message"
+                    required
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full py-6 glow-box"
+                >
+                  Send Message
+                </Button>
+              </form>
+            )}
           </motion.div>
 
           <motion.div
@@ -624,7 +608,7 @@ export default function Portfolio() {
               className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
             >
               <Mail className="h-5 w-5" />
-              <span>hello@example.com</span>
+              <span>meokeyo27@gmail.com</span>
             </a>
             <a
               href="https://github.com"
@@ -633,7 +617,7 @@ export default function Portfolio() {
               className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
             >
               <Github className="h-5 w-5" />
-              <span>github.com/developer</span>
+              <span>github.com/kisugez</span>
             </a>
           </motion.div>
         </div>
@@ -825,9 +809,9 @@ export default function Portfolio() {
             <div>
               <h3 className="text-xl font-bold mb-4">Contact</h3>
               <div className="space-y-2">
-                <p>hello@example.com</p>
-                <p>+1 (555) 123-4567</p>
-                <p>123 Developer Way, Tech City</p>
+                <p>@meokeyo27@gmail.com</p>
+                <p>+974 3302 7926</p>
+                <p>4050 Doha Qatar</p>
               </div>
             </div>
             <div>
@@ -858,26 +842,12 @@ export default function Portfolio() {
             <div>
               <h3 className="text-xl font-bold mb-4">Follow</h3>
               <div className="flex gap-4">
-                <a href="#" className="text-white hover:text-[#a67c52] transition-colors">
+                <a href="https://github.com/kisugez" className="text-white hover:text-[#a67c52] transition-colors">
                   <Github className="h-6 w-6" />
                 </a>
-                <a href="#" className="text-white hover:text-[#a67c52] transition-colors">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-twitter"
-                  >
-                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                  </svg>
-                </a>
-                <a href="#" className="text-white hover:text-[#a67c52] transition-colors">
+              
+              
+                <a href="https://www.linkedin.com/in/erick-kisuge-7ba983287/" className="text-white hover:text-[#a67c52] transition-colors">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -900,7 +870,7 @@ export default function Portfolio() {
           </div>
 
           <div className="mt-12 text-center text-sm text-gray-500">
-            <p>© {new Date().getFullYear()} Developer Portfolio. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Erick Kisuge. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -1090,107 +1060,93 @@ const projects: Project[] = [
     title: "E-Commerce Platform",
     description:
       "A full-featured e-commerce platform with product management, cart functionality, payment processing, and order tracking. Built with a modern tech stack for optimal performance.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Next.js", "TypeScript", "Stripe", "MongoDB", "Tailwind CSS"],
-    liveUrl: "#",
-    githubUrl: "#",
-    stats: {
-      devTime: "3 months",
-      teamSize: "4 developers",
-      satisfaction: "98%",
-      year: "2023",
-    },
-  },
-  {
-    title: "Task Management App",
-    description:
-      "A collaborative task management application with real-time updates, team workspaces, and progress tracking. Features include drag-and-drop interfaces and detailed analytics.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["React", "Node.js", "Socket.io", "PostgreSQL", "Redux"],
-    liveUrl: "#",
-    githubUrl: "#",
+    image: "/screenshot (60).png?height=400&width=600",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "MySQL"],
+    liveUrl: "https://www.affordableimportske.com/",
+    githubUrl: "https://github.com/kisugez/Affordable-Imports-Ecommerce-Store",
     stats: {
       devTime: "2 months",
-      teamSize: "3 developers",
-      satisfaction: "95%",
-      year: "2022",
+      teamSize: "2 developers",
+      satisfaction: "98%",
+      year: "2024",
     },
   },
   {
-    title: "Social Media Dashboard",
+    title: "Education Portal and Job placement",
     description:
-      "A comprehensive dashboard for social media management, featuring content scheduling, analytics, and audience insights across multiple platforms.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Vue.js", "Express", "GraphQL", "Firebase", "D3.js"],
-    liveUrl: "#",
-    githubUrl: "#",
+      "A Simple Interactive Web app for Educational Placements for scholarships and Job placement.",
+    image: "/screenshot (65).png",
+    technologies: ["Next.js", "Tailwind.css", "TypeScript", "PostgreSQL", "Redux"],
+    liveUrl: "https://eclipsoninternational.com/",
+    githubUrl: "https://github.com/kisugez/Eclipson-Website",
     stats: {
-      devTime: "4 months",
+      devTime: "1 months",
+      teamSize: "1 developers",
+      satisfaction: "95%",
+      year: "2024",
+    },
+  },
+  {
+    title: "Car Dealership App",
+    description:
+      "A comprehensive car dealership app, featuring content scheduling, analytics, and audience insights across multiple platforms and seamless purchasing intergration for vehicles.",
+    image: "/screenshot (67).png?height=400&width=600",
+    technologies: ["React.js:", "Django", "SQLite", "Tailwind CSS", "Docker"],
+    liveUrl: "https://autodealer.vercel.app/",
+    githubUrl: "https://github.com/kisugez/Car-Dealership-FullStack-Project",
+    stats: {
+      devTime: "2 months",
       teamSize: "5 developers",
       satisfaction: "97%",
-      year: "2023",
+      year: "2025",
     },
   },
   {
-    title: "Real Estate Marketplace",
+    title: "A Social Networking & Event Booking Platform",
     description:
-      "A property listing platform with advanced search capabilities, virtual tours, and agent-client communication tools. Includes map integration and filtering options.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["React", "Django", "PostgreSQL", "AWS", "Mapbox"],
-    liveUrl: "#",
-    githubUrl: "#",
+      "A  scalable and user-friendly web platform that allows users to connect with like-minded individuals, discover and book both free and paid events, and create their own meetups or communities. The project focuses on enhancing community engagement through intuitive design and smooth event exploration.",
+    image: "/screenshot (69).png?height=400&width=600",
+    technologies: ["React", "Node.js", "MongoDB", "JSON Web Token", "Tailwind CSS"],
+    liveUrl: "https://kisugezsocial-sphere-app.vercel.app/",
+    githubUrl: "https://github.com/kisugez/socialshpere",
     stats: {
-      devTime: "5 months",
-      teamSize: "4 developers",
-      satisfaction: "96%",
+      devTime: "1 months",
+      teamSize: "1 developers",
+      satisfaction: "2025",
       year: "2022",
     },
   },
   {
-    title: "Health & Fitness Tracker",
+    title: "Female Health Tracker",
     description:
       "A comprehensive health tracking application with workout planning, nutrition logging, and progress visualization. Features include custom goal setting and social sharing.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["React Native", "Node.js", "MongoDB", "Chart.js", "Auth0"],
-    liveUrl: "#",
-    githubUrl: "#",
+    image: "/screenshot (71).png?height=400&width=600",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "pnpm:", "Vercel"],
+    liveUrl: "https://adaora-green.vercel.app/",
+    githubUrl: "https://github.com/kisugez/adaora",
     stats: {
-      devTime: "3 months",
-      teamSize: "3 developers",
+      devTime: "1 months",
+      teamSize: "1 developers",
       satisfaction: "94%",
-      year: "2021",
+      year: "2025",
     },
   },
   {
-    title: "Learning Management System",
+    title: "Diaspora Fintech",
     description:
-      "An educational platform for course creation, student enrollment, and progress tracking. Includes features for video lectures, quizzes, and discussion forums.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Next.js", "Express", "MySQL", "AWS S3", "Stripe"],
-    liveUrl: "#",
-    githubUrl: "#",
+      "A diaspora-focused fintech web app that provides savings, loans, and investment solutions for Kenyans living abroad.",
+    image: "/screenshot (73).png?height=400&width=600",
+    technologies: ["Next.js", "Node.Js", "MySQL", " PostCSS", "Tailwind CSS"],
+    liveUrl: "https://keqatsico.com/",
+    githubUrl: "https://github.com/kisugez/KEQAT-Website",
     stats: {
-      devTime: "6 months",
+      devTime: "1 months",
       teamSize: "6 developers",
       satisfaction: "98%",
       year: "2023",
     },
   },
-  {
-    title: "Creative Portfolio CMS",
-    description:
-      "A content management system designed specifically for creative professionals to showcase their work. Features include customizable layouts and integrated contact forms.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Gatsby", "Sanity.io", "GraphQL", "Netlify", "Framer Motion"],
-    liveUrl: "#",
-    githubUrl: "#",
-    stats: {
-      devTime: "2 months",
-      teamSize: "2 developers",
-      satisfaction: "99%",
-      year: "2022",
-    },
-  },
+  
 ]
 
 // Service Profiles Data
@@ -1200,7 +1156,7 @@ const profiles = [
     subtitle: "Creating beautiful user interfaces",
     description:
       "Specializing in crafting responsive, intuitive, and visually appealing user interfaces that provide exceptional user experiences across all devices.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/light-brown-color-solid-background-1920x1080.png?height=400&width=600",
     features: [
       "Responsive web design",
       "Interactive UI/UX",
@@ -1214,13 +1170,12 @@ const profiles = [
     subtitle: "Building robust server solutions",
     description:
       "Developing secure, scalable, and efficient server-side applications that power your digital products with reliable performance and data management.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/light-brown-color-solid-background-1920x1080.png?height=400&width=600",
     features: [
       "API development",
       "Database design",
       "Authentication systems",
-      "Server optimization",
-      "Cloud infrastructure",
+      "Serverless architecture",
     ],
   },
   {
@@ -1228,7 +1183,7 @@ const profiles = [
     subtitle: "Visual storytelling that captivates",
     description:
       "Creating compelling visual assets that communicate your brand message effectively and leave a lasting impression on your audience.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/light-brown-color-solid-background-1920x1080.png?height=400&width=600",
     features: [
       "Brand identity design",
       "UI design systems",
@@ -1242,7 +1197,7 @@ const profiles = [
     subtitle: "Strategies that drive growth",
     description:
       "Implementing data-driven marketing strategies to increase your online presence, engage your target audience, and drive conversions.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/light-brown-color-solid-background-1920x1080.png",
     features: [
       "SEO optimization",
       "Content marketing",
