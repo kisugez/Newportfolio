@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 36 33% 97%;
+    --foreground: 0 0% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 18%;
+
+    --primary: 27 35% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 32 20% 87%;
+    --secondary-foreground: 0 0% 18%;
+
+    --muted: 32 20% 87%;
+    --muted-foreground: 0 0% 43%;
+
+    --accent: 32 20% 87%;
+    --accent-foreground: 0 0% 18%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 27 35% 48%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Futuristic glow effects */
+.glow-text {
+  text-shadow: 0 0 10px rgba(166, 124, 82, 0.5), 0 0 20px rgba(166, 124, 82, 0.3);
+}
+
+.glow-box {
+  box-shadow: 0 0 15px rgba(166, 124, 82, 0.3), 0 0 30px rgba(166, 124, 82, 0.1);
+}
+
+.tech-icon {
+  position: relative;
+}
+
+.tech-icon::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent, rgba(166, 124, 82, 0.3), transparent);
+  z-index: -1;
+  animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Futuristic line decorations */
+.futuristic-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.futuristic-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(166, 124, 82, 0.5), transparent);
+  animation: line-flow 3s linear infinite;
+}
+
+@keyframes line-flow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Gradient backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, rgba(166, 124, 82, 0.1), rgba(166, 124, 82, 0.05), rgba(166, 124, 82, 0.02));
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 0.5rem;
+  background: linear-gradient(45deg, transparent, rgba(166, 124, 82, 0.5), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
