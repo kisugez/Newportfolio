@@ -105,7 +105,9 @@ const [message, setMessage] = useState("");
     <>
       <Head>
         {/* Favicon Section */}
-        <link rel="icon" type="image/png" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <title>Erick Kisuge Portfolio</title>
         <meta name="description" content="Erick Kisuge's Portfolio - Fullstack Developer" />
       </Head>
