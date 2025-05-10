@@ -26,6 +26,7 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import Head from "next/head";
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -101,780 +102,789 @@ const [message, setMessage] = useState("");
   }
 
   return (
-    <div className="bg-[#f8f5f2] text-[#2d2d2d] min-h-screen" ref={containerRef}>
-      {/* Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:py-6 md:px-12 backdrop-blur-md bg-[#f8f5f2]/80">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-xl font-medium"
-          >
-            <Link href="/" className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-[#a67c52]" />
-              <span className="glow-text">erickkisuge.dev</span>
-            </Link>
-          </motion.div>
+    <>
+      <Head>
+        {/* Favicon Section */}
+        <link rel="icon" type="image/png" href="/favicon.ico" />
+        <title>Erick Kisuge Portfolio</title>
+        <meta name="description" content="Erick Kisuge's Portfolio - Fullstack Developer" />
+      </Head>
 
-          <div className="hidden md:flex space-x-8">
-            {["Projects", "About", "Skills", "Contact", "Services"].map((item) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="relative"
-              >
-                <Link
-                  href={`#${item.toLowerCase()}`}
-                  className="text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300 font-medium"
-                >
-                  {item}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(true)}
-              className="text-[#2d2d2d] hover:text-[#a67c52]"
+      <div className="bg-[#f8f5f2] text-[#2d2d2d] min-h-screen" ref={containerRef}>
+        {/* Navigation */}
+        <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:py-6 md:px-12 backdrop-blur-md bg-[#f8f5f2]/80">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-xl font-medium"
             >
-              <Menu className="h-6 w-6" />
-            </Button>
-          </div>
-        </div>
-      </header>
+              <Link href="/" className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-[#a67c52]" />
+                <span className="glow-text">erickkisuge.dev</span>
+              </Link>
+            </motion.div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-[#f8f5f2] z-50 flex flex-col p-6"
-        >
-          <div className="flex justify-end">
-            <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(false)} className="text-[#2d2d2d]">
-              <X className="h-6 w-6" />
-            </Button>
-          </div>
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
-            {["Projects", "About", "Skills", "Contact", "Services"].map((item) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Link
-                  href={`#${item.toLowerCase()}`}
-                  className="text-2xl font-medium text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
-                  onClick={() => setIsMenuOpen(false)}
+            <div className="hidden md:flex space-x-8">
+              {["Projects", "About", "Skills", "Contact", "Services"].map((item) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="relative"
                 >
-                  {item}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      )}
+                  <Link
+                    href={`#${item.toLowerCase()}`}
+                    className="text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300 font-medium"
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
 
-      {/* Data Lightbox */}
-      <AnimatePresence>
-        {lightboxOpen && lightboxData && (
+            <div className="md:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMenuOpen(true)}
+                className="text-[#2d2d2d] hover:text-[#a67c52]"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
+          </div>
+        </header>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
-            onClick={() => setLightboxOpen(false)}
+            className="fixed inset-0 bg-[#f8f5f2] z-50 flex flex-col p-6"
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-xl p-6 max-w-3xl w-full max-h-[80vh] overflow-auto gradient-border"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-2xl font-bold">{lightboxData.title}</h3>
-                <Button variant="ghost" size="icon" onClick={() => setLightboxOpen(false)} className="text-[#2d2d2d]">
-                  <X className="h-6 w-6" />
-                </Button>
-              </div>
-              <div className="relative h-[300px] mb-6 rounded-lg overflow-hidden">
-                <Image
-                  src={lightboxData.image || "/placeholder.svg"}
-                  alt={lightboxData.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="space-y-4">
-                <p>{lightboxData.description}</p>
-                <div className="grid grid-cols-2 gap-4">
-                  {lightboxData.stats &&
-                    Object.entries(lightboxData.stats).map(([key, value]: [string, any]) => (
-                      <div key={key} className="bg-[#f8f5f2] p-4 rounded-lg gradient-bg">
-                        <div className="text-sm text-[#6d6d6d]">{key}</div>
-                        <div className="text-xl font-bold">{value}</div>
-                      </div>
-                    ))}
-                </div>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {lightboxData.technologies &&
-                    lightboxData.technologies.map((tech: string, i: number) => (
-                      <span key={i} className="px-3 py-1 bg-[#e6ddd6] text-[#2d2d2d] text-sm rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Hero Section with Interactive Data */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 md:px-12 overflow-hidden pt-20">
-        <div className="absolute inset-0 -z-10 gradient-bg"></div>
-
-        <motion.div
-          style={{ opacity, scale }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
-          <div
-            className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-[#e6ddd6] opacity-50"
-            style={{
-              transform: "scale(0.9)", // Adjust scale for mobile view
-            }}
-          ></div>
-        </motion.div>
-
-        <div className="max-w-4xl mx-auto text-center z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-6"
-          >
-            <div className="flex items-center justify-center gap-6 mb-8">
-              {[
-                { icon: <Code2 className="h-6 w-6" />, label: "Code" },
-                { icon: <Palette className="h-6 w-6" />, label: "Design" },
-                { icon: <BarChart3 className="h-6 w-6" />, label: "Analytics" },
-                { icon: <Globe className="h-6 w-6" />, label: "Web" },
-                { icon: <Smartphone className="h-6 w-6" />, label: "Mobile" },
-                { icon: <Server className="h-6 w-6" />, label: "Backend" },
-              ].map((item, index) => (
+            <div className="flex justify-end">
+              <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(false)} className="text-[#2d2d2d]">
+                <X className="h-6 w-6" />
+              </Button>
+            </div>
+            <div className="flex flex-col items-center justify-center h-full space-y-8">
+              {["Projects", "About", "Skills", "Contact", "Services"].map((item) => (
                 <motion.div
-                  key={index}
+                  key={item}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="flex flex-col items-center"
+                  transition={{ duration: 0.3 }}
                 >
-                  <div className="bg-white p-3 rounded-full shadow-sm glow-box">{item.icon}</div>
-                  <span className="text-xs mt-2 font-medium">{item.label}</span>
+                  <Link
+                    href={`#${item.toLowerCase()}`}
+                    className="text-2xl font-medium text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
                 </motion.div>
               ))}
             </div>
           </motion.div>
+        )}
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 glow-text"
-          >
-            <span>I </span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={currentWord}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="inline-block text-[#a67c52]"
-              >
-                {words[currentWord]}
-              </motion.span>
-            </AnimatePresence>
-            <span> Digital Experiences</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl text-[#6d6d6d] mb-8 max-w-2xl mx-auto"
-          >
-            Fullstack developer specializing in building modern, responsive, and performant web applications.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Button className="bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full px-8 py-6 glow-box" asChild>
-              <Link href="#projects">
-                View Projects <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-
-            <Button
-              variant="outline"
-              className="border-[#a67c52] text-[#a67c52] hover:bg-[#a67c52] hover:text-white rounded-full px-8 py-6"
-              asChild
-            >
-              <Link href="#contact">Contact Me</Link>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 md:px-12 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-16 text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Featured Projects</h2>
-            <p className="text-[#6d6d6d] max-w-2xl mx-auto">
-              A collection of my recent fullstack development work, showcasing a range of technologies and solutions.
-            </p>
-          </motion.div>
-
-          <div className="space-y-32">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                project={project}
-                index={index}
-                onViewDetails={() =>
-                  openLightbox({
-                    ...project,
-                    stats: {
-                      "Development Time": project.stats.devTime,
-                      "Team Size": project.stats.teamSize,
-                      "Client Satisfaction": project.stats.satisfaction,
-                      "Completion Year": project.stats.year,
-                    },
-                  })
-                }
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-20 px-6 md:px-12 bg-[#e6ddd6] relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 gradient-bg"></div>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        {/* Data Lightbox */}
+        <AnimatePresence>
+          {lightboxOpen && lightboxData && (
             <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-100px" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
+              onClick={() => setLightboxOpen(false)}
             >
-              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden gradient-border glow-box">
-                <Image
-                  src="_BLS8983.jpg?heightplaceholder=500&width=400"
-                  alt="Developer portrait"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="space-y-6"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold glow-text">About Me</h2>
-              <p className="text-[#6d6d6d]">
-                I'm a passionate fullstack developer with 2 years of experience building web applications. My
-                journey in tech started with a curiosity about how websites work, which led me to dive deep into both
-                frontend and backend technologies.
-              </p>
-              <p className="text-[#6d6d6d]">
-                I specialize in creating seamless user experiences with modern JavaScript frameworks such as React JS and Backend Frameworks like Django and Node while building
-                robust and scalable systems. My approach combines technical expertise with a keen eye for design
-                and user experience.
-              </p>
-              <p className="text-[#6d6d6d]">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects.
-              </p>
-
-              <Button
-                className="bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full px-8 py-6 mt-4 glow-box"
-                asChild
-              >
-                <Link href="#contact">Get in Touch</Link>
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 md:px-12 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-16 text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Skills & Expertise</h2>
-            <p className="text-[#6d6d6d] max-w-2xl mx-auto">
-              A comprehensive overview of my technical skills and areas of expertise.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <SkillCategory
-                title="Frontend Development"
-                skills={["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Redux"]}
-                delay={0}
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <SkillCategory
-                title="Backend Development"
-                skills={["Node.js", "Express", "Python", "Django", "GraphQL", "RESTful APIs"]}
-                delay={0.2}
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <SkillCategory
-                title="Database & DevOps"
-                skills={["MongoDB", "PostgreSQL","Docker","CI/CD"]}
-                delay={0.4}
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 md:px-12 bg-[#e6ddd6] relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 gradient-bg"></div>
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-12 text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Let's Connect</h2>
-            <p className="text-[#6d6d6d] max-w-2xl mx-auto">
-              Have a project in mind or want to discuss potential opportunities? I'd love to hear from you.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="bg-white rounded-lg p-8 shadow-sm gradient-border glow-box"
-          >
-            {formSubmitted ? (
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-[#a67c52] mb-4">Thank You!</h2>
-                <p className="text-[#6d6d6d]">Your message has been sent successfully.</p>
-              </div>
-            ) : (
-              <form
-                className="space-y-6"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setFormSubmitted(true); // Set the formSubmitted state to true
-                }}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                      placeholder="Your name"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                      placeholder="Your email"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium">
-                    Subject
-                  </label>
-                  <input
-                    id="subject"
-                    type="text"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                    placeholder="Subject"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                    placeholder="Your message"
-                    required
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full py-6 glow-box"
-                >
-                  Send Message
-                </Button>
-              </form>
-            )}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8"
-          >
-            <a
-              href="mailto:hello@example.com"
-              className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
-            >
-              <Mail className="h-5 w-5" />
-              <span>meokeyo27@gmail.com</span>
-            </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
-            >
-              <Github className="h-5 w-5" />
-              <span>github.com/kisugez</span>
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Services Carousel Section */}
-      <section id="services" className="py-20 px-6 md:px-12 bg-white relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-16 text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Services</h2>
-            <p className="text-[#6d6d6d] max-w-2xl mx-auto">
-              Specialized services tailored to meet your digital needs.
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={prevProfile}
-                className="rounded-full bg-white border-[#a67c52] text-[#a67c52] hover:bg-[#a67c52] hover:text-white glow-box"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </Button>
-            </div>
-
-            <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={nextProfile}
-                className="rounded-full bg-white border-[#a67c52] text-[#a67c52] hover:bg-[#a67c52] hover:text-white glow-box"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </Button>
-            </div>
-
-            <div className="overflow-hidden" ref={carouselRef}>
               <motion.div
-                className="flex"
-                animate={{ x: `-${activeProfile * 100}%` }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-white rounded-xl p-6 max-w-3xl w-full max-h-[80vh] overflow-auto gradient-border"
+                onClick={(e) => e.stopPropagation()}
               >
-                {profiles.map((profile, index) => (
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-2xl font-bold">{lightboxData.title}</h3>
+                  <Button variant="ghost" size="icon" onClick={() => setLightboxOpen(false)} className="text-[#2d2d2d]">
+                    <X className="h-6 w-6" />
+                  </Button>
+                </div>
+                <div className="relative h-[300px] mb-6 rounded-lg overflow-hidden">
+                  <Image
+                    src={lightboxData.image || "/placeholder.svg"}
+                    alt={lightboxData.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="space-y-4">
+                  <p>{lightboxData.description}</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    {lightboxData.stats &&
+                      Object.entries(lightboxData.stats).map(([key, value]: [string, any]) => (
+                        <div key={key} className="bg-[#f8f5f2] p-4 rounded-lg gradient-bg">
+                          <div className="text-sm text-[#6d6d6d]">{key}</div>
+                          <div className="text-xl font-bold">{value}</div>
+                        </div>
+                      ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {lightboxData.technologies &&
+                      lightboxData.technologies.map((tech: string, i: number) => (
+                        <span key={i} className="px-3 py-1 bg-[#e6ddd6] text-[#2d2d2d] text-sm rounded-full">
+                          {tech}
+                        </span>
+                      ))}
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Hero Section with Interactive Data */}
+        <section className="relative min-h-screen flex items-center justify-center px-6 md:px-12 overflow-hidden pt-20">
+          <div className="absolute inset-0 -z-10 gradient-bg"></div>
+
+          <motion.div
+            style={{ opacity, scale }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          >
+            <div
+              className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-[#e6ddd6] opacity-50"
+              style={{
+                transform: "scale(0.9)", // Adjust scale for mobile view
+              }}
+            ></div>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto text-center z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-6"
+            >
+              <div className="flex items-center justify-center gap-6 mb-8">
+                {[
+                  { icon: <Code2 className="h-6 w-6" />, label: "Code" },
+                  { icon: <Palette className="h-6 w-6" />, label: "Design" },
+                  { icon: <BarChart3 className="h-6 w-6" />, label: "Analytics" },
+                  { icon: <Globe className="h-6 w-6" />, label: "Web" },
+                  { icon: <Smartphone className="h-6 w-6" />, label: "Mobile" },
+                  { icon: <Server className="h-6 w-6" />, label: "Backend" },
+                ].map((item, index) => (
                   <motion.div
                     key={index}
-                    className="min-w-full px-12"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 * index }}
+                    className="flex flex-col items-center"
                   >
-                    <div className="bg-[#f8f5f2] rounded-xl overflow-hidden gradient-border glow-box">
-                      <div className="grid md:grid-cols-2 gap-0">
-                        <div className="relative h-[300px] md:h-auto">
-                          <Image
-                            src={profile.image || "/placeholder.svg"}
-                            alt={profile.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                            <div className="text-white text-center p-6">
-                              <div className="text-3xl font-bold mb-2 glow-text">{profile.title}</div>
-                              <div className="text-lg">{profile.subtitle}</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="p-8 md:p-12">
-                          <h3 className="text-2xl font-bold mb-4">{profile.title}</h3>
-                          <p className="text-[#6d6d6d] mb-6">{profile.description}</p>
-
-                          <div className="space-y-4">
-                            {profile.features.map((feature, i) => (
-                              <div key={i} className="flex items-start gap-3">
-                                <div className="bg-[#a67c52] text-white p-1 rounded-full mt-0.5">
-                                  <Check className="h-4 w-4" />
-                                </div>
-                                <span>{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <Button className="mt-8 bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full glow-box">
-                            Learn More
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+                    <div className="bg-white p-3 rounded-full shadow-sm glow-box">{item.icon}</div>
+                    <span className="text-xs mt-2 font-medium">{item.label}</span>
                   </motion.div>
                 ))}
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
-            <div className="flex justify-center mt-8 gap-2">
-              {profiles.map((_, index) => (
-                <button
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 glow-text"
+            >
+              <span>I </span>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentWord}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-block text-[#a67c52]"
+                >
+                  {words[currentWord]}
+                </motion.span>
+              </AnimatePresence>
+              <span> Digital Experiences</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-lg md:text-xl text-[#6d6d6d] mb-8 max-w-2xl mx-auto"
+            >
+              Fullstack developer specializing in building modern, responsive, and performant web applications.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Button className="bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full px-8 py-6 glow-box" asChild>
+                <Link href="#projects">
+                  View Projects <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+
+              <Button
+                variant="outline"
+                className="border-[#a67c52] text-[#a67c52] hover:bg-[#a67c52] hover:text-white rounded-full px-8 py-6"
+                asChild
+              >
+                <Link href="#contact">Contact Me</Link>
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section id="projects" className="py-20 px-6 md:px-12 relative overflow-hidden">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-16 text-center"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Featured Projects</h2>
+              <p className="text-[#6d6d6d] max-w-2xl mx-auto">
+                A collection of my recent fullstack development work, showcasing a range of technologies and solutions.
+              </p>
+            </motion.div>
+
+            <div className="space-y-32">
+              {projects.map((project, index) => (
+                <ProjectCard
                   key={index}
-                  onClick={() => setActiveProfile(index)}
-                  className={`w-3 h-3 rounded-full ${activeProfile === index ? "bg-[#a67c52]" : "bg-[#e6ddd6]"}`}
-                  aria-label={`Go to slide ${index + 1}`}
+                  project={project}
+                  index={index}
+                  onViewDetails={() =>
+                    openLightbox({
+                      ...project,
+                      stats: {
+                        "Development Time": project.stats.devTime,
+                        "Team Size": project.stats.teamSize,
+                        "Client Satisfaction": project.stats.satisfaction,
+                        "Completion Year": project.stats.year,
+                      },
+                    })
+                  }
                 />
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Interactive Word Transition */}
-      <section className="py-20 px-6 md:px-12 bg-[#e6ddd6] overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="relative">
+        {/* About Section */}
+        <section id="about" className="py-20 px-6 md:px-12 bg-[#e6ddd6] relative overflow-hidden">
+          <div className="absolute inset-0 -z-10 gradient-bg"></div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden gradient-border glow-box">
+                  <Image
+                    src="_BLS8983.jpg?heightplaceholder=500&width=400"
+                    alt="Developer portrait"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="space-y-6"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold glow-text">About Me</h2>
+                <p className="text-[#6d6d6d]">
+                  I'm a passionate fullstack developer with 2 years of experience building web applications. My
+                  journey in tech started with a curiosity about how websites work, which led me to dive deep into both
+                  frontend and backend technologies.
+                </p>
+                <p className="text-[#6d6d6d]">
+                  I specialize in creating seamless user experiences with modern JavaScript frameworks such as React JS and Backend Frameworks like Django and Node while building
+                  robust and scalable systems. My approach combines technical expertise with a keen eye for design
+                  and user experience.
+                </p>
+                <p className="text-[#6d6d6d]">
+                  When I'm not coding, you can find me exploring new technologies, contributing to open-source projects.
+                </p>
+
+                <Button
+                  className="bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full px-8 py-6 mt-4 glow-box"
+                  asChild
+                >
+                  <Link href="#contact">Get in Touch</Link>
+                </Button>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" className="py-20 px-6 md:px-12 relative overflow-hidden">
+          <div className="max-w-6xl mx-auto">
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="flex overflow-hidden py-10"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-16 text-center"
             >
-              {Array(3)
-                .fill(["Design", "Develop", "Deploy", "Maintain", "Optimize"])
-                .flat()
-                .map((word, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ x: "100%" }}
-                    animate={{ x: "-100%" }}
-                    transition={{
-                      repeat: Number.POSITIVE_INFINITY,
-                      repeatType: "loop",
-                      duration: 20,
-                      ease: "linear",
-                      delay: index * 0.1,
-                    }}
-                    className="flex-shrink-0 mx-8"
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Skills & Expertise</h2>
+              <p className="text-[#6d6d6d] max-w-2xl mx-auto">
+                A comprehensive overview of my technical skills and areas of expertise.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <SkillCategory
+                  title="Frontend Development"
+                  skills={["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Redux"]}
+                  delay={0}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <SkillCategory
+                  title="Backend Development"
+                  skills={["Node.js", "Express", "Python", "Django", "GraphQL", "RESTful APIs"]}
+                  delay={0.2}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <SkillCategory
+                  title="Database & DevOps"
+                  skills={["MongoDB", "PostgreSQL","Docker","CI/CD"]}
+                  delay={0.4}
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-20 px-6 md:px-12 bg-[#e6ddd6] relative overflow-hidden">
+          <div className="absolute inset-0 -z-10 gradient-bg"></div>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-12 text-center"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Let's Connect</h2>
+              <p className="text-[#6d6d6d] max-w-2xl mx-auto">
+                Have a project in mind or want to discuss potential opportunities? I'd love to hear from you.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="bg-white rounded-lg p-8 shadow-sm gradient-border glow-box"
+            >
+              {formSubmitted ? (
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-[#a67c52] mb-4">Thank You!</h2>
+                  <p className="text-[#6d6d6d]">Your message has been sent successfully.</p>
+                </div>
+              ) : (
+                <form
+                  className="space-y-6"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setFormSubmitted(true); // Set the formSubmitted state to true
+                  }}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="text-sm font-medium">
+                        Name
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                        placeholder="Your name"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-sm font-medium">
+                        Email
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                        placeholder="Your email"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="subject" className="text-sm font-medium">
+                      Subject
+                    </label>
+                    <input
+                      id="subject"
+                      type="text"
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                      placeholder="Subject"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      rows={5}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+                      placeholder="Your message"
+                      required
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full py-6 glow-box"
                   >
-                    <span className="text-6xl md:text-8xl font-bold text-[#a67c52] opacity-20">{word}</span>
-                  </motion.div>
-                ))}
+                    Send Message
+                  </Button>
+                </form>
+              )}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8"
+            >
+              <a
+                href="mailto:hello@example.com"
+                className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
+              >
+                <Mail className="h-5 w-5" />
+                <span>meokeyo27@gmail.com</span>
+              </a>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
+              >
+                <Github className="h-5 w-5" />
+                <span>github.com/kisugez</span>
+              </a>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Services Carousel Section */}
+        <section id="services" className="py-20 px-6 md:px-12 bg-white relative overflow-hidden">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-16 text-center"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 glow-text">Services</h2>
+              <p className="text-[#6d6d6d] max-w-2xl mx-auto">
+                Specialized services tailored to meet your digital needs.
+              </p>
+            </motion.div>
+
+            <div className="relative">
+              <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={prevProfile}
+                  className="rounded-full bg-white border-[#a67c52] text-[#a67c52] hover:bg-[#a67c52] hover:text-white glow-box"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+              </div>
+
+              <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={nextProfile}
+                  className="rounded-full bg-white border-[#a67c52] text-[#a67c52] hover:bg-[#a67c52] hover:text-white glow-box"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+
+              <div className="overflow-hidden" ref={carouselRef}>
+                <motion.div
+                  className="flex"
+                  animate={{ x: `-${activeProfile * 100}%` }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                >
+                  {profiles.map((profile, index) => (
+                    <motion.div
+                      key={index}
+                      className="min-w-full px-12"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="bg-[#f8f5f2] rounded-xl overflow-hidden gradient-border glow-box">
+                        <div className="grid md:grid-cols-2 gap-0">
+                          <div className="relative h-[300px] md:h-auto">
+                            <Image
+                              src={profile.image || "/placeholder.svg"}
+                              alt={profile.title}
+                              fill
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                              <div className="text-white text-center p-6">
+                                <div className="text-3xl font-bold mb-2 glow-text">{profile.title}</div>
+                                <div className="text-lg">{profile.subtitle}</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="p-8 md:p-12">
+                            <h3 className="text-2xl font-bold mb-4">{profile.title}</h3>
+                            <p className="text-[#6d6d6d] mb-6">{profile.description}</p>
+
+                            <div className="space-y-4">
+                              {profile.features.map((feature, i) => (
+                                <div key={i} className="flex items-start gap-3">
+                                  <div className="bg-[#a67c52] text-white p-1 rounded-full mt-0.5">
+                                    <Check className="h-4 w-4" />
+                                  </div>
+                                  <span>{feature}</span>
+                                </div>
+                              ))}
+                            </div>
+
+                            <Button className="mt-8 bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full glow-box">
+                              Learn More
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+
+              <div className="flex justify-center mt-8 gap-2">
+                {profiles.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveProfile(index)}
+                    className={`w-3 h-3 rounded-full ${activeProfile === index ? "bg-[#a67c52]" : "bg-[#e6ddd6]"}`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Interactive Word Transition */}
+        <section className="py-20 px-6 md:px-12 bg-[#e6ddd6] overflow-hidden">
+          <div className="max-w-6xl mx-auto">
+            <div className="relative">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="flex overflow-hidden py-10"
+              >
+                {Array(3)
+                  .fill(["Design", "Develop", "Deploy", "Maintain", "Optimize"])
+                  .flat()
+                  .map((word, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ x: "100%" }}
+                      animate={{ x: "-100%" }}
+                      transition={{
+                        repeat: Number.POSITIVE_INFINITY,
+                        repeatType: "loop",
+                        duration: 20,
+                        ease: "linear",
+                        delay: index * 0.1,
+                      }}
+                      className="flex-shrink-0 mx-8"
+                    >
+                      <span className="text-6xl md:text-8xl font-bold text-[#a67c52] opacity-20">{word}</span>
+                    </motion.div>
+                  ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
     
 
-      {/* Footer with Criss-Cross Effect */}
-      <footer className="py-12 px-6 md:px-12 bg-black text-white overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          {/* Criss-Cross Words Effect */}
-          <div className="relative h-[300px] md:h-[400px] mb-12">
-            {[
-              { text: "CREATIVE", x: "10%", y: "10%", rotate: -15, delay: 0 },
-              { text: "INNOVATIVE", x: "70%", y: "20%", rotate: 10, delay: 0.1 },
-              { text: "RESPONSIVE", x: "30%", y: "30%", rotate: -5, delay: 0.2 },
-              { text: "MODERN", x: "60%", y: "40%", rotate: 15, delay: 0.3 },
-              { text: "SCALABLE", x: "20%", y: "50%", rotate: -10, delay: 0.4 },
-              { text: "PERFORMANT", x: "80%", y: "60%", rotate: 5, delay: 0.5 },
-              { text: "ACCESSIBLE", x: "40%", y: "70%", rotate: -20, delay: 0.6 },
-              { text: "INTUITIVE", x: "50%", y: "80%", rotate: 10, delay: 0.7 },
-            ].map((word, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: word.delay }}
-                viewport={{ once: true }}
-                className="absolute font-bold text-2xl md:text-4xl lg:text-5xl"
-                style={{
-                  left: word.x,
-                  top: word.y,
-                  transform: `rotate(${word.rotate}deg)`,
-                  color: index % 2 === 0 ? "#ffffff" : "#a67c52",
-                }}
-              >
-                {word.text}
-              </motion.div>
-            ))}
-          </div>
+        {/* Footer with Criss-Cross Effect */}
+        <footer className="py-12 px-6 md:px-12 bg-black text-white overflow-hidden">
+          <div className="max-w-6xl mx-auto">
+            {/* Criss-Cross Words Effect */}
+            <div className="relative h-[300px] md:h-[400px] mb-12">
+              {[
+                { text: "CREATIVE", x: "10%", y: "10%", rotate: -15, delay: 0 },
+                { text: "INNOVATIVE", x: "70%", y: "20%", rotate: 10, delay: 0.1 },
+                { text: "RESPONSIVE", x: "30%", y: "30%", rotate: -5, delay: 0.2 },
+                { text: "MODERN", x: "60%", y: "40%", rotate: 15, delay: 0.3 },
+                { text: "SCALABLE", x: "20%", y: "50%", rotate: -10, delay: 0.4 },
+                { text: "PERFORMANT", x: "80%", y: "60%", rotate: 5, delay: 0.5 },
+                { text: "ACCESSIBLE", x: "40%", y: "70%", rotate: -20, delay: 0.6 },
+                { text: "INTUITIVE", x: "50%", y: "80%", rotate: 10, delay: 0.7 },
+              ].map((word, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: word.delay }}
+                  viewport={{ once: true }}
+                  className="absolute font-bold text-2xl md:text-4xl lg:text-5xl"
+                  style={{
+                    left: word.x,
+                    top: word.y,
+                    transform: `rotate(${word.rotate}deg)`,
+                    color: index % 2 === 0 ? "#ffffff" : "#a67c52",
+                  }}
+                >
+                  {word.text}
+                </motion.div>
+              ))}
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-8 border-t border-gray-800 pt-12">
-            <div>
-              <h3 className="text-xl font-bold mb-4">Contact</h3>
-              <div className="space-y-2">
-                <p>@meokeyo27@gmail.com</p>
-                <p>+974 3302 7926</p>
-                <p>4050 Doha Qatar</p>
+            <div className="grid md:grid-cols-3 gap-8 border-t border-gray-800 pt-12">
+              <div>
+                <h3 className="text-xl font-bold mb-4">Contact</h3>
+                <div className="space-y-2">
+                  <p>@meokeyo27@gmail.com</p>
+                  <p>+974 3302 7926</p>
+                  <p>4050 Doha Qatar</p>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">Links</h3>
-              <div className="space-y-2">
-                <p>
-                  <a href="#" className="hover:text-[#a67c52] transition-colors">
-                    Projects
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="hover:text-[#a67c52] transition-colors">
-                    About
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="hover:text-[#a67c52] transition-colors">
-                    Services
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="hover:text-[#a67c52] transition-colors">
-                    Contact
-                  </a>
-                </p>
+              <div>
+                <h3 className="text-xl font-bold mb-4">Links</h3>
+                <div className="space-y-2">
+                  <p>
+                    <a href="#" className="hover:text-[#a67c52] transition-colors">
+                      Projects
+                    </a>
+                  </p>
+                  <p>
+                    <a href="#" className="hover:text-[#a67c52] transition-colors">
+                      About
+                    </a>
+                  </p>
+                  <p>
+                    <a href="#" className="hover:text-[#a67c52] transition-colors">
+                      Services
+                    </a>
+                  </p>
+                  <p>
+                    <a href="#" className="hover:text-[#a67c52] transition-colors">
+                      Contact
+                    </a>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">Follow</h3>
-              <div className="flex gap-4">
-                <a href="https://github.com/kisugez" className="text-white hover:text-[#a67c52] transition-colors">
-                  <Github className="h-6 w-6" />
-                </a>
+              <div>
+                <h3 className="text-xl font-bold mb-4">Follow</h3>
+                <div className="flex gap-4">
+                  <a href="https://github.com/kisugez" className="text-white hover:text-[#a67c52] transition-colors">
+                    <Github className="h-6 w-6" />
+                  </a>
               
               
-                <a href="https://www.linkedin.com/in/erick-kisuge-7ba983287/" className="text-white hover:text-[#a67c52] transition-colors">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-linkedin"
-                  >
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                    <rect width="4" height="12" x="2" y="9" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
-                </a>
+                  <a href="https://www.linkedin.com/in/erick-kisuge-7ba983287/" className="text-white hover:text-[#a67c52] transition-colors">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-linkedin"
+                    >
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect width="4" height="12" x="2" y="9" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="mt-12 text-center text-sm text-gray-500">
-            <p>© {new Date().getFullYear()} Erick Kisuge. All rights reserved.</p>
+            <div className="mt-12 text-center text-sm text-gray-500">
+              <p>© {new Date().getFullYear()} Erick Kisuge. All rights reserved.</p>
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   )
 }
 
