@@ -819,23 +819,21 @@ const [message, setMessage] = useState("");
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.8 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center justify-center"
         >
-          <div className="flex flex-col items-center">
-            <p className="text-sm text-[#6d6d6d] mb-2 font-medium">Scroll to explore</p>
-            <div className="w-[30px] h-[50px] border-2 border-[#a67c52] rounded-full flex justify-center glow-box">
-              <motion.div
-                animate={{
-                  y: [0, 15, 0],
-                }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 1.5,
-                }}
-                className="w-[8px] h-[8px] bg-[#a67c52] rounded-full mt-2"
-              />
-            </div>
+          <div className="w-[30px] h-[50px] border-2 border-[#a67c52] rounded-full flex justify-center glow-box">
+            <motion.div
+              animate={{
+                y: [0, 15, 0],
+              }}
+              transition={{
+                repeat: Number.POSITIVE_INFINITY,
+                duration: 1.5,
+              }}
+              className="w-[8px] h-[8px] bg-[#a67c52] rounded-full mt-2"
+            />
           </div>
+          <p className="text-sm text-[#6d6d6d] mt-2 font-medium">Scroll to explore</p>
         </motion.div>
 
 
