@@ -124,7 +124,7 @@ const [message, setMessage] = useState("");
             >
               <Link href="/" className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-[#a67c52]" />
-                <span className="glow-text">erickkisuge.dev</span>
+                <span className="glow-text">Erick Kisuge Portfolio</span>
               </Link>
             </motion.div>
 
