@@ -327,6 +327,40 @@ const [message, setMessage] = useState("");
               Fullstack developer specializing in building modern, responsive, and performant web applications.
             </motion.p>
 
+          {/* Interactive Developer Stats */}
+          <motion.div style={{ y: springY }} className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+            {[
+              { value: "2+", label: "Years Experience" },
+              { value: "20+", label: "Projects Completed" },
+              { value: "10+", label: "Happy Clients" },
+              { value: "10+", label: "Technologies" },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white p-4 rounded-lg shadow-sm cursor-pointer gradient-border"
+                onClick={() =>
+                  openLightbox({
+                    title: stat.label,
+                    description: `Details about my ${stat.label.toLowerCase()}.`,
+                    image: "/placeholder.svg",
+                    stats: {
+                      Total: stat.value,
+                      "Last Year": index === 0 ? "1+" : index === 1 ? "12+" : index === 2 ? "8+" : "5+",
+                    },
+                  })
+                }
+              >
+                <div className="text-3xl font-bold text-[#a67c52] glow-text">{stat.value}</div>
+                <div className="text-sm text-[#6d6d6d] font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -780,7 +814,62 @@ const [message, setMessage] = useState("");
           </div>
         </section>
 
-    
+        {/* Interactive Developer Stats */}
+<motion.div style={{ y: springY }} className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+  {[
+    { value: "7+", label: "Years Experience" },
+    { value: "50+", label: "Projects Completed" },
+    { value: "30+", label: "Happy Clients" },
+    { value: "15+", label: "Technologies" },
+  ].map((stat, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1 * index }}
+      whileHover={{ scale: 1.05 }}
+      className="bg-white p-4 rounded-lg shadow-sm cursor-pointer gradient-border"
+      onClick={() =>
+        openLightbox({
+          title: stat.label,
+          description: `Details about my ${stat.label.toLowerCase()}.`,
+          image: "/placeholder.svg",
+          stats: {
+            Total: stat.value,
+            "Last Year": index === 0 ? "1+" : index === 1 ? "12+" : index === 2 ? "8+" : "5+",
+          },
+        })
+      }
+    >
+      <div className="text-3xl font-bold text-[#a67c52] glow-text">{stat.value}</div>
+      <div className="text-sm text-[#6d6d6d] font-medium">{stat.label}</div>
+    </motion.div>
+  ))}
+</motion.div>
+
+<motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.8 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+        >
+          <div className="flex flex-col items-center">
+            <p className="text-sm text-[#6d6d6d] mb-2 font-medium">Scroll to explore</p>
+            <div className="w-[30px] h-[50px] border-2 border-[#a67c52] rounded-full flex justify-center glow-box">
+              <motion.div
+                animate={{
+                  y: [0, 15, 0],
+                }}
+                transition={{
+                  repeat: Number.POSITIVE_INFINITY,
+                  duration: 1.5,
+                }}
+                className="w-[8px] h-[8px] bg-[#a67c52] rounded-full mt-2"
+              />
+            </div>
+          </div>
+        </motion.div>
+
 
         {/* Footer with Criss-Cross Effect */}
         <footer className="py-12 px-6 md:px-12 bg-black text-white overflow-hidden">
