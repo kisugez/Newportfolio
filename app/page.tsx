@@ -815,38 +815,6 @@ const [message, setMessage] = useState("");
         </section>
 
         {/* Interactive Developer Stats */}
-<motion.div style={{ y: springY }} className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-  {[
-    { value: "7+", label: "Years Experience" },
-    { value: "50+", label: "Projects Completed" },
-    { value: "30+", label: "Happy Clients" },
-    { value: "15+", label: "Technologies" },
-  ].map((stat, index) => (
-    <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 * index }}
-      whileHover={{ scale: 1.05 }}
-      className="bg-white p-4 rounded-lg shadow-sm cursor-pointer gradient-border"
-      onClick={() =>
-        openLightbox({
-          title: stat.label,
-          description: `Details about my ${stat.label.toLowerCase()}.`,
-          image: "/placeholder.svg",
-          stats: {
-            Total: stat.value,
-            "Last Year": index === 0 ? "1+" : index === 1 ? "12+" : index === 2 ? "8+" : "5+",
-          },
-        })
-      }
-    >
-      <div className="text-3xl font-bold text-[#a67c52] glow-text">{stat.value}</div>
-      <div className="text-sm text-[#6d6d6d] font-medium">{stat.label}</div>
-    </motion.div>
-  ))}
-</motion.div>
-
 <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.8 }}
