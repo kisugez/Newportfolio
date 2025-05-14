@@ -28,6 +28,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Head from "next/head";
 import { useForm, ValidationError } from "@formspree/react";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -828,6 +829,9 @@ export default function Portfolio() {
           </div>
         </footer>
       </div>
+
+      {/* Add Analytics */}
+      <Analytics />
     </>
   )
 }
