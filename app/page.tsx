@@ -27,6 +27,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Head from "next/head";
+import { useForm, ValidationError } from "@formspree/react";
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -88,17 +89,6 @@ export default function Portfolio() {
   const openLightbox = (data: any) => {
     setLightboxData(data)
     setLightboxOpen(true)
-  }
-
-  const [formSubmitted, setFormSubmitted] = useState(false);
-const [name, setName] = useState("");
-const [email, setEmail] = useState("");
-const [subject, setSubject] = useState("");
-const [message, setMessage] = useState("");
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormSubmitted(true);
   }
 
   return (
@@ -560,110 +550,7 @@ const [message, setMessage] = useState("");
               viewport={{ once: true, margin: "-100px" }}
               className="bg-white rounded-lg p-8 shadow-sm gradient-border glow-box"
             >
-              {formSubmitted ? (
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold text-[#a67c52] mb-4">Thank You!</h2>
-                  <p className="text-[#6d6d6d]">Your message has been sent successfully.</p>
-                </div>
-              ) : (
-                <form
-                  className="space-y-6"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setFormSubmitted(true); // Set the formSubmitted state to true
-                  }}
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Name
-                      </label>
-                      <input
-                        id="name"
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                        placeholder="Your name"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                        placeholder="Your email"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
-                      Subject
-                    </label>
-                    <input
-                      id="subject"
-                      type="text"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                      placeholder="Subject"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={5}
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
-                      placeholder="Your message"
-                      required
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full py-6 glow-box"
-                  >
-                    Send Message
-                  </Button>
-                </form>
-              )}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8"
-            >
-              <a
-                href="mailto:hello@example.com"
-                className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
-              >
-                <Mail className="h-5 w-5" />
-                <span>meokeyo27@gmail.com</span>
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#2d2d2d] hover:text-[#a67c52] transition-colors duration-300"
-              >
-                <Github className="h-5 w-5" />
-                <span>github.com/kisugez</span>
-              </a>
+              <ContactForm />
             </motion.div>
           </div>
         </section>
@@ -1274,3 +1161,89 @@ const profiles = [
     ],
   },
 ]
+
+function ContactForm() {
+  const [state, handleSubmit] = useForm("xpwdovrj");
+
+  if (state.succeeded) {
+    return (
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-[#a67c52] mb-4">Thank You!</h2>
+        <p className="text-[#6d6d6d]">Your message has been sent successfully.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 relative z-10"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label htmlFor="name" className="text-sm font-medium">
+            Name
+          </label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+            placeholder="Your name"
+            required
+          />
+          <ValidationError prefix="Name" field="name" errors={state.errors} />
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="email" className="text-sm font-medium">
+            Email Address
+          </label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+            placeholder="Your email"
+            required
+          />
+          <ValidationError prefix="Email" field="email" errors={state.errors} />
+        </div>
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="subject" className="text-sm font-medium">
+          Subject
+        </label>
+        <input
+          id="subject"
+          type="text"
+          name="subject"
+          className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+          placeholder="Subject"
+          required
+        />
+        <ValidationError prefix="Subject" field="subject" errors={state.errors} />
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="message" className="text-sm font-medium">
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows={5}
+          className="w-full px-4 py-3 border border-[#e0e0e0] rounded-md focus:outline-none focus:ring-2 focus:ring-[#a67c52]"
+          placeholder="Your message"
+          required
+        />
+        <ValidationError prefix="Message" field="message" errors={state.errors} />
+      </div>
+      <button
+        type="submit"
+        disabled={state.submitting}
+        className="w-full bg-[#a67c52] hover:bg-[#8a6642] text-white rounded-full py-6 glow-box"
+      >
+        Send Message
+      </button>
+    </form>
+  );
+}
